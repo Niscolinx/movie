@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import './App.scss'
 import Movies from './Movies'
 import axios from 'axios'
-import { Container, Col, Row, Carousel } from 'react-bootstrap';
+import { Carousel } from 'react-bootstrap';
 
 
 class App extends Component {
   state = {
     rows: '',
     error: false,
+    movieDisplay: '',
   }
 
   inputChange = (event) =>{
@@ -16,12 +17,12 @@ class App extends Component {
     const searchField = event.target.value
     this.componentDidMount(searchField)
   }
-  componentDidMount(search) {
-    const api = 'https://api.themoviedb.org/3/search/movie?api_key=ea87ab0831b286e4e73751ae0b5b7a46&query='
-    // const api = 'https://api.themoviedb.org/3/trending/all/day?api_key=ea87ab0831b286e4e73751ae0b5b7a46';
 
+  componentDidMount(search) {
+    // const api = 'https://api.themoviedb.org/3/search/movie?api_key=ea87ab0831b286e4e73751ae0b5b7a46&query='
+    const api = 'https://api.themoviedb.org/3/trending/all/day?api_key=ea87ab0831b286e4e73751ae0b5b7a46'
     axios
-    .get(api + search)
+    .get(api)
     .then(res => {
       const movies = res.data.results
       const movie = movies.map(movies => {
@@ -42,7 +43,7 @@ class App extends Component {
         })
       });
     }
-    
+
     render() {
     return (
       <div>
@@ -51,7 +52,7 @@ class App extends Component {
        <input 
        type='text' className='header__input' 
        placeholder='please search your movies here'
-       onChange = {this.inputChange}
+       onSubmit = {this.inputChange}
         />
       </header>
       <main className='main'>
@@ -60,7 +61,7 @@ class App extends Component {
             <Carousel.Item>
               <img
                 className="d-block w-100"
-                src= {require('./img/header-1.jpg')}
+                src= {require('./img/slide1.jpg')}
                 alt="First slide"
               />
               <Carousel.Caption>
@@ -71,7 +72,7 @@ class App extends Component {
             <Carousel.Item>
               <img
                 className="d-block w-100"
-                src= {require('./img/header-1.jpg')}
+                src= {require('./img/slide2.jpg')}
                 alt="second slide"
               />
 
@@ -83,7 +84,7 @@ class App extends Component {
             <Carousel.Item>
               <img
                 className="d-block w-100"
-                src= {require('./img/header-1.jpg')}
+                src= {require('./img/slide3.jpg')}
                 alt="Third slide"
               />
 
@@ -92,10 +93,13 @@ class App extends Component {
                 <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
               </Carousel.Caption>
             </Carousel.Item>
-          </Carousel>;
+          </Carousel>
       </div>
       </main>
+      {this.state.movieDisplay}
+      <div className = 'movieRows'>
       {this.state.rows}
+      </div>
       </div>
     );
   }
