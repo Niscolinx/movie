@@ -34,7 +34,7 @@ class App extends Component {
           /> 
          });
          this.setState({
-           rows: movie
+           movieDisplay: movie
           });
         })
       .catch(error => {
@@ -98,7 +98,7 @@ class App extends Component {
       </main>
       {this.state.movieDisplay}
       <div className = 'movieRows'>
-      {this.state.rows}
+      {this.state.movieDisplay}
       </div>
       </div>
     );
