@@ -42,6 +42,18 @@ class App extends Component {
           error:true
         })
       });
+    this.fetchData();
+  }
+
+  fetchData(){
+    fetch('https://api.themoviedb.org/3/trending/all/day?api_key=ea87ab0831b286e4e73751ae0b5b7a46')
+    .then(res => res.json())
+    .then(parsedJSON => console.log(parsedJSON.results))
+    .then(trending =>
+      this.setState({
+        rows:trending
+      }))
+    .catch(error => console.log('parsing JSON failed', error))
     }
 
     render() {
