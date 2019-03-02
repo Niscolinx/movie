@@ -9,7 +9,6 @@ class App extends Component {
   state = {
     rows: '',
     error: false,
-    movieDisplay: '',
   }
 
   inputChange = (event) =>{
@@ -19,10 +18,9 @@ class App extends Component {
   }
 
   componentDidMount(search) {
-    // const api = 'https://api.themoviedb.org/3/search/movie?api_key=ea87ab0831b286e4e73751ae0b5b7a46&query='
-    const api = 'https://api.themoviedb.org/3/trending/all/day?api_key=ea87ab0831b286e4e73751ae0b5b7a46'
+    const api = 'https://api.themoviedb.org/3/search/movie?api_key=ea87ab0831b286e4e73751ae0b5b7a46&query='
     axios
-    .get(api)
+    .get(api + search)
     .then(res => {
       const movies = res.data.results
       const movie = movies.map(movies => {
@@ -34,25 +32,27 @@ class App extends Component {
           /> 
          });
          this.setState({
-           movieDisplay: movie
+           rows: movie
           });
         })
       .catch(error => {
+        console.log(error)
         this.setState({
           error:true
         })
       });
-    this.fetchData();
   }
 
-  fetchData(){
-    fetch('https://api.themoviedb.org/3/trending/all/day?api_key=ea87ab0831b286e4e73751ae0b5b7a46')
-    .then(res => res.json())
-    .then(parsedJSON => console.log(parsedJSON.results))
-    .then(trending =>
+  componentDidMount(){
+    axios
+    .get('https://api.themoviedb.org/3/trending/all/day?api_key=ea87ab0831b286e4e73751ae0b5b7a46')
+    .then(res => {
+      const display = res.data.results
+      console.log(display)
       this.setState({
-        rows:trending
-      }))
+        movieDisplay: display
+      })
+    })
     .catch(error => console.log('parsing JSON failed', error))
     }
 
@@ -64,7 +64,7 @@ class App extends Component {
        <input 
        type='text' className='header__input' 
        placeholder='please search your movies here'
-       onSubmit = {this.inputChange}
+       onChange = {this.inputChange}
         />
       </header>
       <main className='main'>
@@ -108,7 +108,7 @@ class App extends Component {
           </Carousel>
       </div>
       </main>
-      {this.state.movieDisplay}
+      {this.state.rows}
       <div className = 'movieRows'>
       {this.state.movieDisplay}
       </div>

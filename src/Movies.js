@@ -6,9 +6,10 @@ class Movies extends Component {
     const url = 'https://www.themoviedb.org/movie/' + this.props.movies.id
     window.location.href = url
   }
+  
     render(){
       return(
-      <div>
+        <div>
         <Media className='movie__items'>
             <img
               width={150}
