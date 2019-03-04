@@ -1,0 +1,35 @@
+.header{
+  background: rgba(1, 5, 8, 0.76);
+  color: rgb(206, 50, 50);
+    display: block;
+  }
+  .header__input{
+    font-size: 18px;
+    padding: 5px;
+    border: none;
+    background: transparent;
+    color: white;
+  }
+
+.w-100{
+  height: 80vh;
+}
+.carousel-control-next-icon, .carousel-control-prev-icon {
+display: none; 
+}
+.carousel-indicators li{
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+}
+.main{
+  margin-bottom: 12rem;
+}
+.movieRows{
+  display: flex;
+  width: 35rem;
+}
+.movie__items{
+  display: flex;
+  flex-direction: column;
+}
