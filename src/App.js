@@ -3,18 +3,27 @@ import './App.scss'
 import Movies from './Movies'
 import axios from 'axios'
 import { Carousel } from 'react-bootstrap';
-
+import Trending from './Trending'
 
 class App extends Component {
   state = {
     rows: '',
     error: false,
+    movieDisplay: '',
+    change: '',
   }
 
-  inputChange = (event) =>{
-    console.log(event.target.value)
-    const searchField = event.target.value
+  inputChange = (e) =>{
+    e.preventDefault();
+    const searchField = this.state.change
     this.componentDidMount(searchField)
+
+  }
+  change = (e) => {
+    const changedInp = e.target.value;
+    this.setState({
+      change: changedInp
+    })
   }
 
   componentDidMount(search) {
@@ -23,6 +32,7 @@ class App extends Component {
     .get(api + search)
     .then(res => {
       const movies = res.data.results
+      console.log(movies)
       const movie = movies.map(movies => {
         const src = 'https://image.tmdb.org/t/p/w200/' + movies.poster_path
         return <Movies 
@@ -41,18 +51,26 @@ class App extends Component {
           error:true
         })
       });
+      this.Trending();
   }
 
-  componentDidMount(){
+  Trending(){
     axios
     .get('https://api.themoviedb.org/3/trending/all/day?api_key=ea87ab0831b286e4e73751ae0b5b7a46')
     .then(res => {
-      const display = res.data.results
-      console.log(display)
-      this.setState({
-        movieDisplay: display
-      })
-    })
+      const displaytem = res.data.results.slice(0,5)
+      const display = displaytem.map(movies => {
+        const src = 'https://image.tmdb.org/t/p/w200/' + movies.poster_path
+        return <Trending 
+          movies = {movies}
+          key = {movies.id}
+          src = {src}
+          /> 
+         });
+         this.setState({
+           movieDisplay: display
+          });
+        })
     .catch(error => console.log('parsing JSON failed', error))
     }
 
@@ -61,11 +79,14 @@ class App extends Component {
       <div>
       <header className='header'>
        <h1>The movie search</h1>
-       <input 
-       type='text' className='header__input' 
+       <form
+       onSubmit = {this.inputChange}>
+       <input type='text' className='header__input' 
        placeholder='please search your movies here'
-       onChange = {this.inputChange}
-        />
+         onChange = {this.change}
+       />
+       </form>
+        
       </header>
       <main className='main'>
       <div className = 'main__carousel'>
