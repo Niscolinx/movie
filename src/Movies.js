@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import {Media} from 'react-bootstrap'
 
 class Movies extends Component {
   clickHandler = () =>{
@@ -10,7 +9,7 @@ class Movies extends Component {
     render(){
       return(
         <div>
-        <Media className='movie__items'>
+        <div className='movie-overlay'>
             <img
               width={150}
               height={150}
@@ -18,11 +17,11 @@ class Movies extends Component {
               src = {this.props.src}
               alt="Generic placeholder"
             />
-            <Media.Body>
-            <h4>{this.props.movies.title}</h4>
-            <p>{this.props.movies.overview}</p>
-            </Media.Body>
-          </Media>;
+            <div className = 'movie-overlay__box'>
+              <h4 className = 'movie__overlay__title'>{this.props.movies.title}</h4>
+              <p>{this.props.movies.overview}</p>
+              </div>
+          </div>
       </div>
       )
     }

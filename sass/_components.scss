@@ -1,15 +1,3 @@
-.header{
-  background: rgba(1, 5, 8, 0.76);
-  color: rgb(206, 50, 50);
-    display: block;
-  }
-  .header__input{
-    font-size: 18px;
-    padding: 5px;
-    border: none;
-    background: transparent;
-    color: white;
-  }
 
 .w-100{
   height: 80vh;
@@ -23,13 +11,38 @@ display: none;
   height: 10px;
 }
 .main{
-  margin-bottom: 12rem;
+  padding-bottom: 2rem;
+  background: $primary-color;
 }
-.movieRows{
-  display: flex;
-  width: 35rem;
-}
+//MOVIE
 .movie__items{
   display: flex;
   flex-direction: column;
+  margin-bottom: 2rem;
+  cursor: pointer;
+  transition: all .5s;
+
+  &:hover{
+    transform: scale(1.1);
+  }
+}
+.movie-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.movie__title{
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $text-color;
+}
+.movie__heading{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  color: $text-color;
+  font-style: italic;
+  padding: 2rem 0;
 }

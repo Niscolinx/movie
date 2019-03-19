@@ -58,7 +58,7 @@ class App extends Component {
     axios
     .get('https://api.themoviedb.org/3/trending/all/day?api_key=ea87ab0831b286e4e73751ae0b5b7a46')
     .then(res => {
-      const displaytem = res.data.results.slice(0,5)
+      const displaytem = res.data.results
       const display = displaytem.map(movies => {
         const src = 'https://image.tmdb.org/t/p/w200/' + movies.poster_path
         return <Trending 
@@ -78,16 +78,16 @@ class App extends Component {
     return (
       <div>
       <header className='header'>
-       <h1>The movie search</h1>
+       <h1>24Movies</h1>
        <form
        onSubmit = {this.inputChange}>
        <input type='text' className='header__input' 
        placeholder='please search your movies here'
          onChange = {this.change}
        />
-       </form>
-        
+       </form> 
       </header>
+      {this.state.rows}
       <main className='main'>
       <div className = 'main__carousel'>
           <Carousel>
@@ -129,9 +129,11 @@ class App extends Component {
           </Carousel>
       </div>
       </main>
-      {this.state.rows}
+      <div className = 'movie-layout'>
+      <h1  className = 'movie__heading'>Trending</h1>
       <div className = 'movieRows'>
       {this.state.movieDisplay}
+      </div>
       </div>
       </div>
     );

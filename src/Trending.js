@@ -1,24 +1,22 @@
 import React, { Component } from "react"
-import {Media} from 'react-bootstrap'
 
 class Trending extends Component {
 
     render(){
         return(
           <div>
-          <Media className='movie__items'>
+            <div className='movie__items'>
               <img
-                width={150}
-                height={150}
+                width={185}
+                height={185}
                 className="mr-3"
                 src = {this.props.src}
                 alt="Generic placeholder"
               />
-              <Media.Body>
-              <h4>{this.props.movies.title}</h4>
-              <p>{this.props.movies.overview}</p>
-              </Media.Body>
-            </Media>;
+              <div className = 'movie-box'>
+              <h4 className = 'movie__title'>{this.props.movies.title}</h4>
+              </div>
+            </div>
         </div>
         )
       }
