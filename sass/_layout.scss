@@ -38,9 +38,9 @@
     background: white;
     display: flex;
     flex-direction: column;
-    margin-bottom: 2rem;
     cursor: pointer;
-    padding: 1rem 2rem;
+    height: 50vh;
+    padding: 1rem;
 
     &__title {
         font-size: 1rem;
@@ -54,6 +54,6 @@
 }
 
 .main__carousel {
-    position: relative;
     background: rgba(2, 4, 31, 0.863);
+    font-size: 1.3rem;
 }
