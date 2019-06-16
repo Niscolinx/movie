@@ -12,7 +12,7 @@ class Movies extends Component {
         <div className='movie-overlay'>
             <img
               width={150}
-              height={152}
+              height={150}
               className="mr-3"
               src = {this.props.src}
               alt="Generic placeholder"
